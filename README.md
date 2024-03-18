@@ -1,6 +1,7 @@
 # OutliersIdentifier
 
-Short description of your project.
+This project features a .NET Core API designed to identify outliers within stock data from different exchanges.
+Users can filter data using a timestamp parameter, enabling them to focus on specific time periods of interest.
 
 ## Table of Contents
 
