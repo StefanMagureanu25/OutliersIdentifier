@@ -2,6 +2,9 @@
 
 namespace OutliersIdentifier.DTOs
 {
+    /// <summary>
+    /// Data Transfer Object used for extracting 30 data points starting from a specific timestamp
+    /// </summary>
     public class CSVExtractRequest
     {
         [Required]

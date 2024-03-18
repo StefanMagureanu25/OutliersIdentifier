@@ -2,6 +2,9 @@
 
 namespace OutliersIdentifier.Models
 {
+    /// <summary>
+    /// Model which retrieves the data from csv files
+    /// </summary>
     public class DataPoint
     {
         [Index(0)]

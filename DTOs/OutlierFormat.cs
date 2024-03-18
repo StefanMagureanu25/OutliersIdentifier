@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OutliersIdentifier.DTOs
 {
+    /// <summary>
+    /// Data Transfer Object used for successfully adding outliers into the csv files.
+    /// </summary>
     public class OutlierFormat
     {
         [Required]
@@ -10,7 +13,9 @@ namespace OutliersIdentifier.DTOs
         [Required]
         public double Mean { get; set; }
 
-        // actual stock price - mean
+        /// <summary>
+        /// actual stock price - mean
+        /// </summary>
         [Required]
         public double Difference { get; set; }
         [Required]

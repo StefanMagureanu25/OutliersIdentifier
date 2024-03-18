@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OutliersIdentifier</name>
+    </assembly>
+    <members>
+        <member name="T:OutliersIdentifier.Controllers.OutliersController">
+            <summary>
+            Controller for retrieving data points and identifying outliers.
+            </summary>
+        </member>
+        <member name="M:OutliersIdentifier.Controllers.OutliersController.GetDataPoints(OutliersIdentifier.DTOs.CSVExtractRequest)">
+            <summary>
+            Retrieves the first 30 data points based on the specified criteria.
+            I also added a sample response for better visualization of the output.
+            </summary>
+            <param name="request">CSV extract request containing the data points starting from a specific timestamp.</param>
+            <returns>The first 30 data points.</returns>
+        </member>
+        <member name="M:OutliersIdentifier.Controllers.OutliersController.GetOutliers(OutliersIdentifier.DTOs.CSVExtractRequest)">
+            <summary>
+            Retrieves outliers based on the specified criteria.
+            I also added a sample response for better visualization of the output.
+            </summary>
+            <param name="request">CSV extract request containing the data points starting from a specific timestamp.</param>
+            <returns>The outliers identified.</returns>
+        </member>
+        <member name="T:OutliersIdentifier.DTOs.CSVExtractRequest">
+            <summary>
+            Data Transfer Object used for extracting 30 data points starting from a specific timestamp
+            </summary>
+        </member>
+        <member name="T:OutliersIdentifier.DTOs.OutlierFormat">
+            <summary>
+            Data Transfer Object used for successfully adding outliers into the csv files.
+            </summary>
+        </member>
+        <member name="P:OutliersIdentifier.DTOs.OutlierFormat.Difference">
+            <summary>
+            actual stock price - mean
+            </summary>
+        </member>
+        <member name="T:OutliersIdentifier.Helpers.Enums.Constants">
+            <summary>
+            Constants added for directories path
+            </summary>
+        </member>
+        <member name="T:OutliersIdentifier.Models.DataPoint">
+            <summary>
+            Model which retrieves the data from csv files
+            </summary>
+        </member>
+        <member name="T:OutliersIdentifier.Services.Interfaces.IOutliersService">
+            <summary>
+            Interface for creating our service methods required for retrieving required data
+            </summary>
+        </member>
+        <member name="T:OutliersIdentifier.Services.OutliersService">
+            <summary>
+            Service methods implemented from the interface + different CSV file operations
+            </summary>
+        </member>
+    </members>
+</doc>

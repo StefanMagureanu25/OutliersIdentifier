@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>D:\OutliersIdentifier\Documentation\OutliersIdentifier.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

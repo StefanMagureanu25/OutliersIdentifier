@@ -1,22 +1,39 @@
 ﻿using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using OutliersIdentifier.DTOs;
+using OutliersIdentifier.Models;
 using OutliersIdentifier.Services.Interfaces;
 using System.Net;
 
 namespace OutliersIdentifier.Controllers
 {
+    /// <summary>
+    /// Controller for retrieving data points and identifying outliers.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class OutliersController : ControllerBase
     {
-        IOutliersService _outliersService;
+        private readonly IOutliersService _outliersService;
+
         public OutliersController(IOutliersService outliersService)
         {
             _outliersService = outliersService;
         }
+
+        /// <summary>
+        /// Retrieves the first 30 data points based on the specified criteria.
+        /// I also added a sample response for better visualization of the output.
+        /// </summary>
+        /// <param name="request">CSV extract request containing the data points starting from a specific timestamp.</param>
+        /// <returns>The first 30 data points.</returns>
         [HttpGet]
         [Route("dataPoints")]
+        [ProducesResponseType(typeof(Dictionary<string,IEnumerable<DataPoint>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.RequestUriTooLong)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult GetDataPoints([FromQuery] CSVExtractRequest request)
         {
             try
@@ -49,8 +66,20 @@ namespace OutliersIdentifier.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        /// <summary>
+        /// Retrieves outliers based on the specified criteria.
+        /// I also added a sample response for better visualization of the output.
+        /// </summary>
+        /// <param name="request">CSV extract request containing the data points starting from a specific timestamp.</param>
+        /// <returns>The outliers identified.</returns>
         [HttpGet]
         [Route("outliers")]
+        [ProducesResponseType(typeof(Dictionary<string, IEnumerable<DataPoint>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.RequestUriTooLong)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult GetOutliers([FromQuery] CSVExtractRequest request)
         {
             try

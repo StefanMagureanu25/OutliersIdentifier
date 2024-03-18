@@ -1,5 +1,7 @@
+using Microsoft.OpenApi.Models;
 using OutliersIdentifier.Services;
 using OutliersIdentifier.Services.Interfaces;
+using System.Reflection;
 
 namespace OutliersIdentifier
 {
@@ -9,12 +11,22 @@ namespace OutliersIdentifier
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Outliers Detection API",
+                    Description = "An API used particularly for retrieving outliers hidden among data points."
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
 
             builder.Services.AddCors(options =>
             {

@@ -9,8 +9,12 @@ using System.Security.AccessControl;
 
 namespace OutliersIdentifier.Services
 {
+    /// <summary>
+    /// Service methods implemented from the interface + different CSV file operations
+    /// </summary>
     public class OutliersService : IOutliersService
     {
+        #region CSV File Operations
         private IEnumerable<DataPoint> ReadFileCsv(string fileName, string timestamp)
         {
             var dataConfig = new CsvConfiguration(CultureInfo.InvariantCulture) { HeaderValidated = null, MissingFieldFound = null };
@@ -31,6 +35,9 @@ namespace OutliersIdentifier.Services
                 csv.WriteRecords(dataPoints);
             }
         }
+        #endregion
+
+        #region Services
         public Dictionary<string, IEnumerable<DataPoint>> GetFirst30DataPoints(CSVExtractRequest request)
         {
             Dictionary<string, IEnumerable<DataPoint>> dataResult = new Dictionary<string, IEnumerable<DataPoint>>();
@@ -87,6 +94,9 @@ namespace OutliersIdentifier.Services
             }
             return outliersResult;
         }
+        #endregion
+
+        #region Statistics
         private double CalculateMean(IEnumerable<DataPoint> dataPoints)
         {
             double sum = 0;
@@ -109,5 +119,6 @@ namespace OutliersIdentifier.Services
             double variance = sumOfSquares / dataPoints.Count();
             return Math.Sqrt(variance);
         }
+        #endregion
     }
 }
