@@ -16,9 +16,6 @@
     <Folder Include="Outliers\StockExchanges\LSE\" />
     <Folder Include="Outliers\StockExchanges\NASDAQ\" />
     <Folder Include="Outliers\StockExchanges\NYSE\" />
-    <Folder Include="StockExchanges\LSE\" />
-    <Folder Include="StockExchanges\NASDAQ\" />
-    <Folder Include="StockExchanges\NYSE\" />
   </ItemGroup>
 
 </Project>

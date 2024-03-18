@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CsvHelper;
+using Microsoft.AspNetCore.Mvc;
 using OutliersIdentifier.DTOs;
-using OutliersIdentifier.Exceptions;
 using OutliersIdentifier.Services.Interfaces;
 using System.Net;
 
@@ -24,13 +24,25 @@ namespace OutliersIdentifier.Controllers
                 var dataPoints = _outliersService.GetFirst30DataPoints(request);
                 return Ok(dataPoints);
             }
-            catch (InsufficientDataPointsException ex)
-            {
-                return StatusCode((int)HttpStatusCode.Forbidden, ex.Message);
-            }
             catch (FileNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (PathTooLongException ex)
+            {
+                return StatusCode((int)HttpStatusCode.RequestUriTooLong, ex.Message);
+            }
+            catch (CsvHelperException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (OutOfMemoryException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {
@@ -46,9 +58,25 @@ namespace OutliersIdentifier.Controllers
                 var outliers = _outliersService.GetOutliers(request);
                 return Ok(outliers);
             }
-            catch (InsufficientDataPointsException ex)
+            catch (FileNotFoundException ex)
             {
-                return StatusCode((int)HttpStatusCode.Forbidden, ex.Message);
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (PathTooLongException ex)
+            {
+                return StatusCode((int)HttpStatusCode.RequestUriTooLong, ex.Message);
+            }
+            catch (CsvHelperException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (OutOfMemoryException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {

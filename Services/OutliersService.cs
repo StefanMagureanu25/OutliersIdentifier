@@ -56,8 +56,8 @@ namespace OutliersIdentifier.Services
             foreach (var dataSet in dataSets)
             {
                 List<DataPoint> outliers = new List<DataPoint>();
-                var mean = CalculateMean(dataSet.Value);
-                var standardDeviation = CalculateStandardDeviation(dataSet.Value, mean);
+                double mean = CalculateMean(dataSet.Value);
+                double standardDeviation = CalculateStandardDeviation(dataSet.Value, mean);
                 double threshold = mean + 2 * standardDeviation;
                 foreach (var dataPoint in dataSet.Value)
                 {
@@ -66,7 +66,6 @@ namespace OutliersIdentifier.Services
                     {
                         outliers.Add(dataPoint);
                     }
-                    outliers.Add(dataPoint);
                 }
                 if (outliers.Count() > 0)
                 {
@@ -96,7 +95,7 @@ namespace OutliersIdentifier.Services
                 double stockPrice = double.Parse(dataPoint.StockPrice, CultureInfo.InvariantCulture);
                 sum += stockPrice;
             }
-            return sum / dataPoints.Count();
+            return (double)sum / dataPoints.Count();
         }
 
         private double CalculateStandardDeviation(IEnumerable<DataPoint> dataPoints, double mean)
